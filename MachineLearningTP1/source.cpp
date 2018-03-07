@@ -22,8 +22,8 @@ extern "C"
 		return temp;
 	}
 
-	int calculateSign(double* W, double x, double y) {
-		double sign = W[1] * x + W[2] * y + W[0];
+	double calculateSign(double* W, double x, double z) {
+		double sign = W[1] * x + W[2] * z + W[0];
 		if (sign < 0) return -1;
 		return 1;
 	}
@@ -49,19 +49,19 @@ extern "C"
 		for (int j = 0; j < iter; j++) {
 			for (int i = 0; i < elem*elemsize; i += elemsize) {				
 				double x = tabSphere[i];
-				double y = tabSphere[i + 1];
-				double sign = calculateSign(W, x, y);
+				double z = tabSphere[i + 1];
+				double sign = calculateSign(W, x, z);
 					
 				W[0] = W[0] + alpha * (tabSphere[i + 2] - sign);
 				W[1] = W[1] + alpha * (tabSphere[i + 2] - sign)*x;
-				W[2] = W[2] + alpha * (tabSphere[i + 2] - sign)*y;
+				W[2] = W[2] + alpha * (tabSphere[i + 2] - sign)*z;
 
 			}
 		}	
 	}
 
-	_declspec(dllexport) double linear_classify(double* W, double x, double y) {
-		return calculateSign(W, x, y);
+	_declspec(dllexport) double linear_classify(double* W, double x, double z) {
+		return calculateSign(W, x, z);
 	}
 	
 }
