@@ -1,3 +1,4 @@
 ﻿  source.cpp
-     Création de la bibliothèque C:\Users\andrem\source\repos\MachineLearningTP1\x64\Debug\MachineLearningTP1.lib et de l'objet C:\Users\andrem\source\repos\MachineLearningTP1\x64\Debug\MachineLearningTP1.exp
-  MachineLearningTP1.vcxproj -> C:\Users\andrem\source\repos\MachineLearningTP1\x64\Debug\MachineLearningTP1.dll
+d:\cours\ml\mlprojectcpp\machinelearningtp1\source.cpp(32): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
+     CrÚation de la bibliothÞque D:\Cours\ML\MLprojectCpp\x64\Debug\MachineLearningTP1.lib et de l'objet D:\Cours\ML\MLprojectCpp\x64\Debug\MachineLearningTP1.exp
+  MachineLearningTP1.vcxproj -> D:\Cours\ML\MLprojectCpp\x64\Debug\MachineLearningTP1.dll
