@@ -16,14 +16,27 @@ extern "C"
 		return W;
 	}
 	//elem = nombre elem ; elem size = taille elem
-	_declspec(dllexport) void linear_train_classification(double* W, int elem, int elemsize, double* tab) {
+	_declspec(dllexport) void linear_train_classification(double* W, int elem, int elemsize, double* tabSphere) {
 		double alpha = 0.1;
-		int iter = 100;
-		for (int i = 0; i < elem*elemsize; i+=2) {
-			int x = tab[i];
-			int z = tab[i + 1];
+		int iter = 10000;
+		for (int j = 0; j < iter; j++) {
+			for (int i = 0; i < elem*elemsize; i += elemsize) {				
+				double x = tabSphere[i];
+				double y = tabSphere[i + 1];
+				double sign = calculateSign(W, x, y);
+	
+				W[0] = W[0] + alpha * (tabSphere[i + 2] - sign);
+				W[1] = W[1] + alpha * (tabSphere[i + 2] - sign)*x;
+				W[2] = W[2] + alpha * (tabSphere[i + 2] - sign)*y;
 
-		}
+			}
+		}	
+	}
+
+	int calculateSign(double* W , double x, double y) {
+		double sign = W[1] * x + W[2] * y + W[0];
+		if (sign < 0) return -1;
+		return 1;
 	}
 
 
