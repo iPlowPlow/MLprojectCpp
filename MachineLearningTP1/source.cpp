@@ -1,9 +1,42 @@
 #include <stdlib.h>
 #include <iostream>
 #include <time.h>
+#include <Eigen/Dense>
+using Eigen::MatrixXd;
 
 extern "C"
 {
+	void linear_predict(double* W, MatrixXd mT, MatrixXd mI, MatrixXd y) {
+
+		MatrixXd mResult = (mI*mT)*y;
+		W[0] = mResult(0);
+		W[1] = mResult(1);
+		W[2] = mResult(2);
+
+	}
+
+	_declspec(dllexport) void linear_train_regression(double* W, int elem, int elemsize, double* tabSphere) {
+		MatrixXd m(elem, 3);
+		MatrixXd y(elem, 1);
+		int i = 0;
+
+		int index = 0;
+		for (i = 0; i < elem; i++) {
+			y(i, 0) = tabSphere[3 * i + 2];
+			m(i, 0) = 1;
+			m(i, 1) = tabSphere[3 * i];
+			m(i, 2) = tabSphere[3 * i + 1];
+		}
+
+	
+
+		MatrixXd mT = m.transpose();
+		MatrixXd mTmp = (mT * m);
+		MatrixXd mI = mTmp.inverse();
+
+		linear_predict(W, mT, mI, y);
+	}
+
 	double randDouble(double low, double high)
 	{
 		double temp;
