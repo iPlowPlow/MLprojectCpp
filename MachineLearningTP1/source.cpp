@@ -43,9 +43,9 @@ extern "C"
 	}
 
 	//elem = nombre elem ; elem size = taille elem
-	_declspec(dllexport) void linear_train_classification(double* W, int elem, int elemsize, double* tabSphere) {
-		double alpha = 0.1;
-		int iter = 10000;
+	_declspec(dllexport) void linear_train_classification(double* W, int elem, int elemsize, double* tabSphere, double alpha, int iter) {
+		//double alpha = 0.1;
+		//int iter = 10000;
 		for (int j = 0; j < iter; j++) {
 			for (int i = 0; i < elem*elemsize; i += elemsize) {				
 				double x = tabSphere[i];
